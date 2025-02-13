@@ -22,52 +22,30 @@ internal class Program
 
     private static async Task HandleUpdate(ITelegramBotClient client, Update update, CancellationToken token)
     {
-        Message? message = update.Message;
 
-        long chatId = message!.Chat.Id;
-        string? text = message.Text;
-
-        await client.SendMessage(chatId, message.Text);
-
-        if (update.Type == UpdateType.Message)
+        if(update.Type == UpdateType.Message)
         {
-            if (message?.Type == MessageType.Text)
-            {
-                await tgClient.SendMessage(message.Chat.Id, "Ответ на команду!");
+            Message? message = update.Message;
 
-                if(message.Text == "/start")
-                {
-                    await CreateStartButtons(message);
-                }
-            }
-            else
-            {
-                await tgClient.SendMessage(message.Chat.Id, "Пожалуйста, введите команду");
-            }
+            if (message?.Text == "/start")
+                await CreateStartButtons(message);
+        }
+        else if(update.Type == UpdateType.CallbackQuery)
+        {
+            Message? message = update.CallbackQuery?.Message;
+
         }
     }
 
-    private static async Task CreateStartButtons(Message? message)
+    private static async Task CreateStartButtons(Message message)
     {
-        List<List<KeyboardButton>> keyboard = new List<List<KeyboardButton>>
-        {
-            new List<KeyboardButton>
-            {
-                new KeyboardButton { Text = "Начать играть" },
-            },
-            new List<KeyboardButton>
-            {
-                new KeyboardButton { Text = "Правила" }
-            },
-            new List<KeyboardButton>
-            {
-                new KeyboardButton { Text = "Настройки" }
-            }
-        };
+        var keyboard = new InlineKeyboardMarkup([
+                [InlineKeyboardButton.WithCallbackData("Начать играть", "/start_game")],
+                [InlineKeyboardButton.WithCallbackData("Правила", "/rules")],
+                [InlineKeyboardButton.WithCallbackData("Статистика", "/statistics")]
+            ]);
 
-        var replyKeyboardMarkup = new ReplyKeyboardMarkup(keyboard);
-
-        await tgClient.SendMessage(message.Chat.Id, "Выберете действие:", replyMarkup: replyKeyboardMarkup);
+        await tgClient.SendMessage(message.Chat.Id, "Выберете действие:", replyMarkup: keyboard);
     }
 
     private static async Task HandleError(ITelegramBotClient client, Exception exception, HandleErrorSource source, CancellationToken token)
