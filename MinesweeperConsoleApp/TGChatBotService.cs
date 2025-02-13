@@ -1,14 +1,18 @@
-﻿using Telegram.Bot;
+﻿using Minesweeper.DB;
+using Minesweeper.Shared;
+using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Game = Minesweeper.Shared.Game;
 
 namespace MinesweeperConsoleApp;
 
 public class TGChatBotService
 {
     private readonly TelegramBotClient _tgClient;
+
     public TGChatBotService(string token)
     {
         _tgClient = new(token);
@@ -27,7 +31,17 @@ public class TGChatBotService
         }
         else if (update.Type == UpdateType.CallbackQuery)
         {
-            Message? message = update.CallbackQuery?.Message;
+            if (update.CallbackQuery is null)
+                throw new Exception("CallbackQuery is null");
+
+            string? text = update.CallbackQuery.Data;
+
+            if (text == "/start_game")
+            {
+                GameMemoryRepository.Add(
+                    update.CallbackQuery.From.Id, 
+                    new Game(update.CallbackQuery.From.Id));
+            }
 
         }
     }
@@ -47,4 +61,6 @@ public class TGChatBotService
     {
         Console.WriteLine(exception.Message);
     }
+
+
 }

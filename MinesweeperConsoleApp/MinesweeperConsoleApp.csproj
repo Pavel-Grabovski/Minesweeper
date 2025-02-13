@@ -13,4 +13,13 @@
     <PackageReference Include="Telegram.Bot" Version="22.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Minesweeper.DB\Minesweeper.DB.csproj" />
+    <ProjectReference Include="..\Minesweeper.Shared\Minesweeper.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Service\" />
+  </ItemGroup>
+
 </Project>
