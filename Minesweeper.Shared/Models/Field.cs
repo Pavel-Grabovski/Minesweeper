@@ -14,8 +14,8 @@ public class Field
 
     private bool[,] GenerateBombs()
     {
-        int rows = 10; // Количество строк
-        int cols = 10; // Количество столбцов
+        int rows = 12; // Количество строк, лимит телеграм по высоте
+        int cols = 8; // Количество столбцов - лимит кнопок в строку
         double bombProbability = 0.15; // Вероятность появления бомбы
 
         Random random = new Random();

@@ -46,7 +46,8 @@ public class TGChatBotHandlerCommand
 
                 await CreateFieldButtons(update.CallbackQuery.Message.Chat.Id, game.GetFieldArray());
             }
-
+            else
+                await _tgClient.SendMessage(update.CallbackQuery.Message.Chat.Id, $"Неизвестная комманда:{text}");
         }
     }
 
