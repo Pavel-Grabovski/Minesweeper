@@ -3,7 +3,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using Game = Minesweeper.Shared.Game;
+using Game = Minesweeper.Shared.Model.Game;
 
 namespace MinesweeperConsoleApp;
 
@@ -34,6 +34,7 @@ public class TGChatBotHandlerCommand
 
             if (text == "/start_game")
             {
+                //TODO добавить проверку на начатую игру, если есть - предложить сыграть заного
                 GameMemoryRepository.Add(
                     update.CallbackQuery.From.Id,
                     new Game(update.CallbackQuery.From.Id));

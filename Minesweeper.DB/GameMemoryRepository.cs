@@ -1,4 +1,4 @@
-﻿using Minesweeper.Shared;
+﻿using Minesweeper.Shared.Model;
 
 namespace Minesweeper.DB;
 
