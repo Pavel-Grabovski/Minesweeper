@@ -9,11 +9,11 @@ using Game = Minesweeper.Shared.Game;
 
 namespace MinesweeperConsoleApp;
 
-public class TGChatBotCommandHandler
+public class TGChatBot
 {
     private readonly TelegramBotClient _tgClient;
 
-    public TGChatBotCommandHandler(string token)
+    public TGChatBot(string token)
     {
         _tgClient = new(token);
         _tgClient.StartReceiving(HandleUpdate, HandleError);

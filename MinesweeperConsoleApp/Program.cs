@@ -6,7 +6,7 @@ internal class Program
     {
         Console.WriteLine("Start MinesweeperConsoleApp.Main");
 
-        TGChatBotCommandHandler _tgCommandHandler = new(Constants.Token); 
+        TGChatBot _tgCommandHandler = new(Constants.Token); 
 
         Console.WriteLine("Bot TG started!");
         Console.Read();
