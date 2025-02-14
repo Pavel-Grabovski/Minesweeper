@@ -6,9 +6,9 @@ public class GameMemoryRepository
 {
     private static readonly Dictionary<long, Game> _games = new Dictionary<long, Game>();
 
-    public static void Add(long id, Game game)
+    public static void Add(Game game)
     {
-        _games[id] = game;
+        _games[game.UserId] = game;
     }
 
     public static Game Get(long userId)

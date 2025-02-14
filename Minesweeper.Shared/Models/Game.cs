@@ -8,6 +8,12 @@ public class Game
 
     private readonly Field _field;
 
+    public long UserId 
+    {
+        get => _userId;
+    }
+
+
     public Game(long userId)
     {
         _userId = userId;
@@ -17,4 +23,6 @@ public class Game
     }
 
     public Field GetField() => _field;
+
+    public bool[,] GetFieldArray() => _field.GetFieldArray();
 }

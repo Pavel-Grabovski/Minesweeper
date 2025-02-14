@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Minesweeper.Shared\Minesweeper.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
-
 </Project>

@@ -10,6 +10,8 @@ public class Field
         _field = GenerateBombs();
     }
 
+    public bool[,] GetFieldArray() => _field;
+
     private bool[,] GenerateBombs()
     {
         int rows = 10; // Количество строк
